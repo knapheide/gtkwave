@@ -327,6 +327,13 @@ static void AddTrace(GwTrace *t)
 
         GLOBALS->strace_ctx->shadow_straces = st;
     }
+
+    // There is t->name and t->full_name
+    char *sstr = g_alloca(strlen(t->name)+1);
+    strcpy(sstr, t->name);
+    gtkwavetcl_setvar(WAVE_TCLCB_TRACE_ADDED,
+                      sstr,
+                      WAVE_TCLCB_TRACE_ADDED_FLAGS);
 }
 
 /*
