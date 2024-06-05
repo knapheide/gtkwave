@@ -35,3 +35,13 @@ brew install desktop-file-utils shared-mime-info       \
 meson setup build
 meson compile -C build
 ```
+
+### Language Server
+
+You can use [Bear](https://github.com/rizsotto/Bear/issues) to
+generate the json files clangd requires:
+
+```sh
+meson compile --clean -C build
+bear -- meson compile -C build
+```

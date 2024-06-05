@@ -1,8 +1,8 @@
 { bzip2, fetchurl, glib, gperf, gtk3, gtk-mac-integration, judy, lib, pkg-config
-, stdenv, tcl, tk, wrapGAppsHook3, xz, meson, ninja, flex, gobject-introspection
+, clangStdenv, tcl, tk, wrapGAppsHook3, xz, meson, ninja, flex, gobject-introspection
 }:
 
-stdenv.mkDerivation rec {
+clangStdenv.mkDerivation rec {
   pname = "gtkwave";
   version = "3.3.119";
 

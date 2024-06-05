@@ -6,8 +6,19 @@
   outputs = { self, nixpkgs, flake-utils, ... }:
     flake-utils.lib.eachDefaultSystem (system:
       let pkgs = nixpkgs.outputs.legacyPackages.${system};
-      in {
-        packages.gtkwave = pkgs.callPackage ./. { };
-        packages.default = self.outputs.packages.${system}.gtkwave;
+      in rec {
+        packages = {
+          gtkwave = pkgs.callPackage ./. { };
+          default = packages.gtkwave;
+        };
+
+        devShells.default = packages.gtkwave.overrideDerivation (old: {
+          nativeBuildInputs = old.nativeBuildInputs
+                              ++ (with pkgs; [ clang-tools bear ]);
+          shellHook = ''
+            export LOCAL_EMACS_CONFIG=$(realpath local.el)
+            export LOCAL_EMACS_SOCKET=$(realpath .emacssock)
+          '';
+        });
       });
 }
