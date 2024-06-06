@@ -16,6 +16,7 @@
           nativeBuildInputs = old.nativeBuildInputs
                               ++ (with pkgs; [ clang-tools bear ]);
           shellHook = ''
+            export PATH="$(pwd)/build/src:$PATH"
             export LOCAL_EMACS_CONFIG=$(realpath local.el)
             export LOCAL_EMACS_SOCKET=$(realpath .emacssock)
           '';
